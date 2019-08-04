@@ -16,12 +16,11 @@ var web3;
 const net = require('net');
 if (!process.env.production) {
     console.log("production");
-    web3 = new Web3(new Web3.providers.IpcProvider('/home/fdm/.atheios/gath.ipc', net));
+    web3 = new Web3(new Web3.providers.IpcProvider(process.env.HOME + '/.atheios/gath.ipc', net));
 }
 else {
     console.log("Development");
-    web3 = new Web3(new Web3.providers.IpcProvider('/Users/fdm/Library/atheios/gath.ipc', net));
-
+    web3 = new Web3(new Web3.providers.IpcProvider(process.env.HOME +'/Library/atheios/gath.ipc', net));
 }
 
 
@@ -35,9 +34,9 @@ exports.athGetBlockNumber = function(cb) {
             console.log(result);
             cb(null, result);
         } else {
-            console.log("error", error)
+            console.log("error", error);
             cb(error, null);
         }
     });
-}
+};
 
