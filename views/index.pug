@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  p http://api.atheios.org:8080/api/xxx with xxx being the API call
+  p Currently supported are the following
+  a(href="api/getBlockNumber") api/getBlockNumber
+  p returns {'getBlockNumber':1757642}
+  a(href="api/currentSupply") api/currentSupply
+  p returns {'currentSupply':1900009}
+  a(href="api/getEpoch") api/getEpoch
+  p returns {"currentEpoch":3,"secsToNextEpoch":29223128,"daysToNextEpoch":338.23064814814813}

@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1 currentSupply
+  p This call will return the current supply of Atheios coins.
+  h2 Parameters
+  p None
+  h2 Returns
+  p Integer number as json
+  h2 Example
+  .alert.alert-info(role="alert")
+    | $ curl "https://api.atheios.org/api/currentSupply"
+    p {"currentSupply":19162760}

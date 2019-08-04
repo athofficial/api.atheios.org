@@ -1,0 +1,56 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    title Atheios API
+    // Bootstrap core CSS
+    link(href='bootstrap/css/bootstrap.min.css', rel='stylesheet')
+    // Custom styles for this template
+    link(href='css/simple-sidebar.css', rel='stylesheet')
+
+body
+  #wrapper.d-flex
+    // Sidebar
+    #sidebar-wrapper.bg-light.border-right
+      .sidebar-heading Atheios API
+      .list-group.list-group-flush
+          a.list-group-item.list-group-item-action.bg-light(href='/') API documentation
+          a.list-group-item.list-group-item-action.bg-light(href='currentSupply') currentSupply
+          a.list-group-item.list-group-item-action.bg-light(href='getBlockNumber') getBlockNumber
+          a.list-group-item.list-group-item-action.bg-light(href='getEpoch') getEpoch
+    // /#sidebar-wrapper
+    // Page Content
+    #page-content-wrapper
+      nav.navbar.navbar-expand-lg.navbar-light.bg-light.border-bottom
+        #navbarSupportedContent.collapse.navbar-collapse
+          ul.navbar-nav.ml-auto.mt-2.mt-lg-0
+            li.nav-item.active
+              a.nav-link(href='#')
+                | Home
+                span.sr-only (current)
+            li.nav-item.dropdown
+              a#navbarDropdown.nav-link.dropdown-toggle(href='/', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                | Atheios links
+              .dropdown-menu.dropdown-menu-right(aria-labelledby='navbarDropdown')
+                a.dropdown-item(href='https://www.atheios.org') Atheios website
+                a.dropdown-item(href='https://explorer.atheios.org') Atheios explorer
+                .dropdown-divider
+                a.dropdown-item(href='https://bloxxchain.atheios.org') Bloxxchain
+      .container-fluid
+        block content
+
+      // /#page-content-wrapper
+        // /#wrapper
+        // Bootstrap core JavaScript
+      script(src='jquery/jquery.min.js')
+      script(src='bootstrap/js/bootstrap.bundle.min.js')
+        // Menu Toggle Script
+      script.
+          $("#menu-toggle").click(function (e) {
+              e.preventDefault();
+          $("#wrapper").toggleClass("toggled");
+          });
+

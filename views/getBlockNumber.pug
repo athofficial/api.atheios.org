@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1 getBlockNumber
+  p This call will return the current block number of the Atheios chain.
+  h2 Parameters
+  p None
+  h2 Returns
+  p Integer number as json
+  h2 Example
+  .alert.alert-info(role="alert")
+    | $ curl "https://api.atheios.org/api/getBlockNumber"
+    p {"getBlockNumber":1763144}

@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1 getEpoch
+  p This call will return the current epoch, seconds and days to the next epoch of the Atheios chain.
+  h2 Parameters
+  p None
+  h2 Returns
+  p Integer number as json, note that the values are rounded accouding to the javascript function Math.round()
+  h2 Example
+  .alert.alert-info(role="alert")
+    | $ curl "https://api.atheios.org/api/getEpoch"
+    p {"currentEpoch":3,"secsToNextEpoch":29158052,"daysToNextEpoch":337}
