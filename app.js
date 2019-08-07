@@ -10,8 +10,10 @@ let api_currentSupplyRouter = require('./routes/api/currentSupply');
 let api_getBlockNumberRouter = require('./routes/api/getBlockNumber');
 let api_getEpoch = require('./routes/api/getEpoch');
 let api_getMonitaryPolicy = require('./routes/api/getMonitaryPolicy');
+let api_getHashRate = require('./routes/api/getHAshRate');
 let getBlockNumberRouter = require('./routes/getBlockNumber');
 let getEpoch = require('./routes/getEpoch');
+let getHashRate = require('./routes/getHashRate');
 let getMonitaryPolicy = require('./routes/getMonitaryPolicy');
 let currentSupply = require('./routes/currentSupply');
 
@@ -31,12 +33,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/', getBlockNumberRouter);
 app.use('/', getEpoch);
+app.use('/', getHashRate);
 app.use('/', getMonitaryPolicy);
 app.use('/', currentSupply);
 app.use('/api/currentSupply', api_currentSupplyRouter);
 app.use('/api/getBlockNumber', api_getBlockNumberRouter);
 app.use('/api/getEpoch', api_getEpoch);
 app.use('/api/getMonitaryPolicy', api_getMonitaryPolicy);
+app.use('/api/getHashRate', api_getHashRate);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
