@@ -3,7 +3,7 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
-  p http://api.atheios.org:8080/api/xxx with xxx being the API call
+  p http://api.atheios.org/api/xxx with xxx being the API call
   p Currently supported are the following
   a(href="api/getBlockNumber") api/getBlockNumber
   p returns {'getBlockNumber':1757642}
@@ -13,5 +13,5 @@ block content
   p returns {"currentEpoch":3,"secsToNextEpoch":29223128,"daysToNextEpoch":338}
   a(href="api/getMonitaryPolicy") api/getMonitaryPolicy
   p returns the monitary policy
-  a(href="api/getHashrate") api/getHashrate
+  a(href="api/getHashRate") api/getHashRate
   p returns network stats
