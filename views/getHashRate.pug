@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  h1 getHashRate
+  p This call will return network information of the Atheios chain.
+  h2 Parameters
+  p None
+  h2 Returns
+  p getHashRate returns hashrate in GH/s
+  p getDifficulty returns current difficulty
+  p getBlockTime returns current blocktime
+  h2 Example
+  .alert.alert-info(role="alert")
+    | $ curl "https://api.atheios.org/api/getMonitraryPolicy"
+  .alert.alert-info(role="info")
+    | {
+    br
+    |  "getHashrate": 1.41,
+    br
+    |  "getDifficulty": "26839542111",
+    br
+    |  "getBlockTime": 19
+    br
+    |  }
