@@ -40,3 +40,67 @@ exports.athGetBlockNumber = function(cb) {
     });
 };
 
+exports.athGetHashrate = function(cb) {
+    web3.eth.getBlockNumber(function(error, blockNum) {
+        let sampleSize=1;
+        if(!error) {
+            web3.eth.getBlock(blockNum, true, function(error, result) {
+                let t1=result.timestamp;
+                web3.eth.getBlock(blockNum-sampleSize, true, function(error, result2) {
+                    let t2=result2.timestamp;
+                    let blockTime=(t1-t2)/sampleSize;
+                    let difficulty=result.difficulty;
+                    let hashrate=difficulty / blockTime;
+                    cb(null, hashrate);
+                });
+            });
+
+
+        } else {
+            console.log("error", error);
+            cb(error, null);
+        }
+    });
+
+};
+
+exports.athGetBlockTime = function(cb) {
+    web3.eth.getBlockNumber(function(error, blockNum) {
+        let sampleSize=1;
+        if(!error) {
+            web3.eth.getBlock(blockNum, true, function(error, result) {
+                let t1=result.timestamp;
+                web3.eth.getBlock(blockNum-sampleSize, true, function(error, result2) {
+                    let t2=result2.timestamp;
+                    let blockTime=(t1-t2)/sampleSize;
+                    cb(null, blockTime);
+                });
+            });
+
+
+        } else {
+            console.log("error", error);
+            cb(error, null);
+        }
+    });
+
+};
+
+exports.athGetDifficulty = function(cb) {
+    web3.eth.getBlockNumber(function(error, blockNum) {
+        let sampleSize=1;
+        if(!error) {
+            web3.eth.getBlock(blockNum, true, function(error, result) {
+                let difficulty=result.difficulty;
+                cb(null, difficulty);
+            });
+
+
+        } else {
+            console.log("error", error);
+            cb(error, null);
+        }
+    });
+
+};
+
