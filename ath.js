@@ -42,7 +42,7 @@ exports.athGetBlockNumber = function(cb) {
 
 exports.athGetHashrate = function(cb) {
     web3.eth.getBlockNumber(function(error, blockNum) {
-        let sampleSize=1;
+        let sampleSize=4;
         if(!error) {
             web3.eth.getBlock(blockNum, true, function(error, result) {
                 let t1=result.timestamp;
@@ -66,7 +66,7 @@ exports.athGetHashrate = function(cb) {
 
 exports.athGetBlockTime = function(cb) {
     web3.eth.getBlockNumber(function(error, blockNum) {
-        let sampleSize=1;
+        let sampleSize=4;
         if(!error) {
             web3.eth.getBlock(blockNum, true, function(error, result) {
                 let t1=result.timestamp;
@@ -88,7 +88,6 @@ exports.athGetBlockTime = function(cb) {
 
 exports.athGetDifficulty = function(cb) {
     web3.eth.getBlockNumber(function(error, blockNum) {
-        let sampleSize=1;
         if(!error) {
             web3.eth.getBlock(blockNum, true, function(error, result) {
                 let difficulty=result.difficulty;

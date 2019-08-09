@@ -2,11 +2,11 @@ extends layout
 
 block content
   h1 getHashRate
-  p This call will return network information of the Atheios chain.
+  p This call will return network information of the Atheios chain. The result is averaged over the recent 4 blocks.
   h2 Parameters
   p None
   h2 Returns
-  p getHashRate returns hashrate in GH/s
+  p getHashRate returns hashrate in MH/s rounded
   p getDifficulty returns current difficulty
   p getBlockTime returns current blocktime
   h2 Example
@@ -15,7 +15,7 @@ block content
   .alert.alert-info(role="info")
     | {
     br
-    |  "getHashRate": 1.41,
+    |  "getHashRate": 1401,
     br
     |  "getDifficulty": "26839542111",
     br

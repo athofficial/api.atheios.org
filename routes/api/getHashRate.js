@@ -9,8 +9,9 @@ router.get('/', function(req, res, next) {
         var i;
         athGetDifficulty(function(error,result2) {
             athGetBlockTime(function(error,result3) {
-                var hashstr=Math.round(result / 1E7) / 100 + "GH/s";
-                res.json({getHashrate: hashstr , getDifficulty: result2, getBlockTime: result3});
+                var hashrate=Math.round(result / 1E6);
+                var difficulty=Math.round(result2);
+                res.json({getHashRate: hashrate , getDifficulty: difficulty, getBlockTime: result3});
             });
         });
     });
