@@ -2,16 +2,53 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
-  p http://api.atheios.org/api/xxx with xxx being the API call
-  p Currently supported are the following
+  P This website provides access to the Atheios blockchain via API calls.
+  h2 Access cia curl
+  .alert.alert-info(role="info")
+    | $ curl "https://api.atheios.org/api/getHashRate"
+  h2 Access via javascript
+  .alert.alert-info(role="info")
+    code.language-scss(data-lang="javascript")
+    |  var request = require('request');
+    br
+    |  var url = 'https://api.atheios.org/api/getHashRate';
+    br
+    |  request.get({ url: url, json: true, headers: {'User-Agent': 'request'}}, (err, res, data) => {
+    br
+    |   if (err) {
+    br
+    |     console.log('Error:', err);
+    br
+    |   } else if (res.statusCode !== 200) {
+    br
+    |     console.log('Status:', res.statusCode);
+    br
+    |   } else {
+    br
+    |     // data is already parsed as JSON:
+    br
+    |     hashrate = data.getHashRate;
+    br
+    |     difficulty = data.getDifficulty;
+    br
+    |     blocktime = data.getBlockTime;
+    br
+    |     // do things
+    br
+    |     }
+    br
+    |  });
+    br
+    |
+
+  h2 API calls
+  p Currently supported are the following API calls
   a(href="api/getBlockNumber") api/getBlockNumber
-  p returns {'getBlockNumber':1757642}
+  br
   a(href="api/currentSupply") api/currentSupply
-  p returns {'currentSupply':1900009}
+  br
   a(href="api/getEpoch") api/getEpoch
-  p returns {"currentEpoch":3,"secsToNextEpoch":29223128,"daysToNextEpoch":338}
+  br
   a(href="api/getMonitaryPolicy") api/getMonitaryPolicy
-  p returns the monitary policy
+  br
   a(href="api/getHashRate") api/getHashRate
-  p returns network stats
