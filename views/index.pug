@@ -1,45 +1,32 @@
 extends layout
 
 block content
+  img.img-fluid.w-100(src="images/api.png")
   h1= title
   P This website provides access to the Atheios blockchain via API calls.
   h2 Access cia curl
   .alert.alert-info(role="info")
-    | $ curl "https://api.atheios.org/api/getHashRate"
+    pre.code
+      | $ curl "https://api.atheios.org/api/getHashRate"
   h2 Access via javascript
   .alert.alert-info(role="info")
-    code.language-scss(data-lang="javascript")
-    |  var request = require('request');
-    br
-    |  var url = 'https://api.atheios.org/api/getHashRate';
-    br
-    |  request.get({ url: url, json: true, headers: {'User-Agent': 'request'}}, (err, res, data) => {
-    br
-    |   if (err) {
-    br
-    |     console.log('Error:', err);
-    br
-    |   } else if (res.statusCode !== 200) {
-    br
-    |     console.log('Status:', res.statusCode);
-    br
-    |   } else {
-    br
-    |     // data is already parsed as JSON:
-    br
-    |     hashrate = data.getHashRate;
-    br
-    |     difficulty = data.getDifficulty;
-    br
-    |     blocktime = data.getBlockTime;
-    br
-    |     // do things
-    br
-    |     }
-    br
-    |  });
-    br
-    |
+    pre.code
+      p var request = require('request');
+      | var url = 'https://api.atheios.org/api/getHashRate';
+      | request.get({ url: url, json: true, headers: {'User-Agent': 'request'}}, (err, res, data) => {
+      |   if (err) {
+      |     console.log('Error:', err);
+      |   } else if (res.statusCode !== 200) {
+      |     console.log('Status:', res.statusCode);
+      |   } else {
+      |     // data is already parsed as JSON:
+      |     hashrate = data.getHashRate;
+      |     difficulty = data.getDifficulty;
+      |     blocktime = data.getBlockTime;
+      |     // do things
+      |     }
+      |  });
+      |
 
   h2 API calls
   p Currently supported are the following API calls

@@ -9,12 +9,13 @@ let indexRouter = require('./routes/index');
 let api_currentSupplyRouter = require('./routes/api/currentSupply');
 let api_getBlockNumberRouter = require('./routes/api/getBlockNumber');
 let api_getEpoch = require('./routes/api/getEpoch');
-let api_getMonitaryPolicy = require('./routes/api/getMonitaryPolicy');
+let api_getMonetaryPolicy = require('./routes/api/getMonetaryPolicy');
 let api_getHashRate = require('./routes/api/getHashRate');
+let api_getGas = require('./routes/api/getGas');
 let getBlockNumberRouter = require('./routes/getBlockNumber');
 let getEpoch = require('./routes/getEpoch');
 let getHashRate = require('./routes/getHashRate');
-let getMonitaryPolicy = require('./routes/getMonitaryPolicy');
+let getMonetaryPolicy = require('./routes/getMonetaryPolicy');
 let currentSupply = require('./routes/currentSupply');
 
 var app = express();
@@ -34,13 +35,14 @@ app.use('/', indexRouter);
 app.use('/', getBlockNumberRouter);
 app.use('/', getEpoch);
 app.use('/', getHashRate);
-app.use('/', getMonitaryPolicy);
+app.use('/', getMonetaryPolicy);
 app.use('/', currentSupply);
 app.use('/api/currentSupply', api_currentSupplyRouter);
 app.use('/api/getBlockNumber', api_getBlockNumberRouter);
 app.use('/api/getEpoch', api_getEpoch);
-app.use('/api/getMonitaryPolicy', api_getMonitaryPolicy);
+app.use('/api/getMonetaryPolicy', api_getMonetaryPolicy);
 app.use('/api/getHashRate', api_getHashRate);
+app.use('/api/getGas', api_getGas);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

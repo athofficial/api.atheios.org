@@ -103,3 +103,63 @@ exports.athGetDifficulty = function(cb) {
 
 };
 
+exports.athGetTransaction = function(cb) {
+    var gasUsed=[];
+
+    web3.eth.getBlockNumber(function(error, blockNum) {
+        if(!error) {
+            web3.eth.getBlock(blockNum, function(error, res) {
+                if(!error) {
+                    gasUsed[0]=res.gasUsed;
+                    web3.eth.getBlock(blockNum-1, function(error, res) {
+                        if(!error) {
+                            gasUsed[1]=res.gasUsed;
+                            web3.eth.getBlock(blockNum-2, function(error, res) {
+                                if(!error) {
+                                    gasUsed[2]=res.gasUsed;
+                                    web3.eth.getBlock(blockNum-3, function(error, res) {
+                                        if(!error) {
+                                            gasUsed[3]=res.gasUsed;
+                                            jsonstr='{gas:{blocknr:'+blockNum+',gasUsed:'+gasUsed[0]+'},'+
+                                                '{blocknr:'+(blockNum-1)+',gasUsed:'+gasUsed[1]+'},'+
+                                                '{blocknr:'+(blockNum-2)+',gasUsed:'+gasUsed[2]+'},'+
+                                                '{blocknr:'+(blockNum-3)+',gasUsed:'+gasUsed[3]+'}}';
+                                            cb(null, jsonstr);
+
+
+                                        } else {
+                                            console.log("error", error);
+                                            cb(error, null);
+                                        }
+                                    });
+
+                                } else {
+                                    console.log("error", error);
+                                    cb(error, null);
+                                }
+                            });
+
+                        } else {
+                            console.log("error", error);
+                            cb(error, null);
+                        }
+                    });
+
+
+                } else {
+                    console.log("error", error);
+                    cb(error, null);
+                }
+            });
+
+
+
+        } else {
+            console.log("error", error);
+            cb(error, null);
+        }
+    });
+
+
+};
+

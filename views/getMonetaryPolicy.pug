@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  h1 getMonitaryPolicy
+  h1 getMonetaryPolicy
   p This call will return the monitary policy of the Atheios chain.
   h2 Parameters
   p None
@@ -9,4 +9,7 @@ block content
   p Integer number as json, note that the values are rounded accouding to the javascript function Math.round()
   h2 Example
   .alert.alert-info(role="alert")
-    | $ curl "https://api.atheios.org/api/getMonitraryPolicy"
+    | $ curl "https://api.atheios.org/api/getMonetraryPolicy"
+  h2 Link
+  .alert.alert-info(role="alert")
+    a(href='https://api.atheios.org/api/getMonetaryPolicy') https://api.atheios.org/api/getMonetaryPolicy
