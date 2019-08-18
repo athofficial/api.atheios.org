@@ -6,7 +6,7 @@ const {athGetTransaction} = require('./../../ath');
 /* GET home page. */
 router.get('/', function(req, res, next) {
     athGetTransaction(function(error,result) {
-                res.json(result);
+                res.json(JSON.parse(result));
             });
 });
 

@@ -120,10 +120,10 @@ exports.athGetTransaction = function(cb) {
                                     web3.eth.getBlock(blockNum-3, function(error, res) {
                                         if(!error) {
                                             gasUsed[3]=res.gasUsed;
-                                            jsonstr='{gas:{blocknr:'+blockNum+',gasUsed:'+gasUsed[0]+'},'+
-                                                '{blocknr:'+(blockNum-1)+',gasUsed:'+gasUsed[1]+'},'+
-                                                '{blocknr:'+(blockNum-2)+',gasUsed:'+gasUsed[2]+'},'+
-                                                '{blocknr:'+(blockNum-3)+',gasUsed:'+gasUsed[3]+'}}';
+                                            jsonstr='{ "gas" : [{"blocknr" : '+blockNum+', "gasUsed" : '+gasUsed[0]+'},'+
+                                                '{"blocknr" : '+(blockNum-1)+',"gasUsed" : '+gasUsed[1]+'},'+
+                                                '{"blocknr" : '+(blockNum-2)+',"gasUsed" : '+gasUsed[2]+'},'+
+                                                '{"blocknr" : '+(blockNum-3)+',"gasUsed" : '+gasUsed[3]+'}]}';
                                             cb(null, jsonstr);
 
 

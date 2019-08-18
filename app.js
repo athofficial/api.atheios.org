@@ -17,6 +17,7 @@ let getEpoch = require('./routes/getEpoch');
 let getHashRate = require('./routes/getHashRate');
 let getMonetaryPolicy = require('./routes/getMonetaryPolicy');
 let currentSupply = require('./routes/currentSupply');
+let getGas = require('./routes/getGas');
 
 var app = express();
 
@@ -37,6 +38,7 @@ app.use('/', getEpoch);
 app.use('/', getHashRate);
 app.use('/', getMonetaryPolicy);
 app.use('/', currentSupply);
+app.use('/', getGas);
 app.use('/api/currentSupply', api_currentSupplyRouter);
 app.use('/api/getBlockNumber', api_getBlockNumberRouter);
 app.use('/api/getEpoch', api_getEpoch);

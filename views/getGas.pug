@@ -1,0 +1,35 @@
+extends layout
+
+block content
+  h1 getGas
+  p This call will return the Gas used of the Atheios chain in the last 4 blocks.
+  h2 Parameters
+  p None
+  h2 Returns
+  p Four tuples of data, block number and gas used in that block
+  h2 Example
+  .alert.alert-info(role="alert")
+    pre.code
+      p $ curl "https://api.atheios.org/api/getGas"
+      | { "gas": [
+      |   {
+      |     "blocknr": 1818868,
+      |     "gasUsed": 21000
+      |   },
+      |   {
+      |     "blocknr": 1818867,
+      |     "gasUsed": 0
+      |    },
+      |   {
+      |     "blocknr": 1818866,
+      |     "gasUsed": 0
+      |   },
+      |   {
+      |     "blocknr": 1818865,
+      |     "gasUsed": 0
+      |   }
+      |   ]
+      | }
+  h2 Link
+  .alert.alert-info(role="alert")
+    a(href='/api/getGas') https://api.atheios.org/api/getGas
