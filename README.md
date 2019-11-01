@@ -16,6 +16,32 @@ Enter the directory with
 ```
 cd api.atheios.org
 ```
+In the config directory it is necessary create atleast one config file.
+```
+vi config/config.production.json
+```
+
+Paste the fillwing JSON config:
+
+```
+{
+  "connectionLimit": 10,
+  "host": "localhost",
+  "user": "root",
+  "password": "REPLACEITWITHYOURPASSWORD"
+  "database": "api",
+  "multipleStatements": true,
+  "timezone": "00:00",
+  "httphost": "https://api.atheios.org"
+}
+```
+Modify the user and password according to the mysql installation. Next we create a database called 'api' with the following syntax (modify the user if needed):
+```
+$ mysqladmin -u root -p create api
+$ mysql -u root -p api < api.sql
+```
+
+Now the database entry is created.
 
 Thereafter we load the dependencies:
 ```
@@ -34,6 +60,8 @@ The script is called 'start_gath.sh' and has the following syntax:
 
 You can run gath with the start script in the background, however syncing the complete blockchain might take 24hrs or more.
 I also run gath with supervisor in order to automatically restart it if it should go down.
+
+
 
 # Run
 After the blcockchain is fully synced, the following command will start the server.
