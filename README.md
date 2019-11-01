@@ -6,16 +6,27 @@ The program provides both the api and documentation for the API calls. The docum
 api calls are available via https://api.atheios.org/api/... followed by the API call.
 
 # Installation
-Nodejs and npm need to be installed. Issue
+Git, Nodejs and npm need to be installed. As we will also need mysql, this needs to be also installed. 
+First we clone this repository on the home directory of the user
+```
+git clone https://github.com/athofficial/api.atheios.org
+```
+Now a directory called api.atheios.org should be available.
+Enter the directory with 
+´´´
+cd api.atheios.org
+´´´
+
+
+Thereafter we load the dependencies:
 ```
 $ npm install
 ```
-This will install all dependencies. After that You can start the server. However note that You need also have gath running in the background. Get the latest gath release and make sure it is running in Your local directory. I create for that a directory in the home dir call gath. That one holds the executable and a script. The script is called 'start_gath.sh' and has the following syntax:
+This will install all dependencies and might take a while. After that You can start the server. However note that You need also have gath running in the background. Get the latest gath release and make sure it is running in Your home directory. I create for that a directory in the home dir call gath. That one holds the executable and a script. The script is called 'start_gath.sh' and has the following syntax:
 ```
 #!/bin/bash
 
 ./gath --rpc --rpcaddr 0.0.0.0 --rpcport 8696 --rpccorsdomain "http://localhost" --rpcapi "personal,db,eth,net,web3"
-# --ipcapi "personal,db,eth,net,web3"
 
 ```
 
