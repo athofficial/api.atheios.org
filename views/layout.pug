@@ -33,6 +33,10 @@ body
             a.h5.nav-link(href='/').text-light
               | Home
               span.sr-only (current)
+          li.nav-item.active.text-light
+            a.h5.nav-link(href='/whatsnew').text-light
+              | What's new
+
           li.nav-item.dropdown
             a#navbarDropdown.h5.nav-link.text-light.dropdown-toggle(href='/', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
               | Atheios links
@@ -44,16 +48,20 @@ body
               a.dropdown-item(href='https://stats.atheios.org') Atheios statistics
               .dropdown-divider
               a.dropdown-item(href='https://bloxxchain.atheios.org') Bloxxchain
+  .container
+    != messages('message', locals)
+    if errors
+      each error, i in errors
+        div(class="alert alert-danger") #{error.msg}
+
   .container-fluid
     .row
       .col.bd-sidebar
         nav#bd-docs-nav.collapse.bd-links
           .bd-toc-item.active
             a.bd-toc-link(href="#")
-              | API
+              | Public API
             ul.nav.bd-sidenav
-              li
-                a(href='/') API documentation
               li
                 a(href='currentSupply') currentSupply
               li
@@ -66,6 +74,12 @@ body
                 a(href='getHashRate') getHashRate
               li
                 a(href='getGas') getGas
+              li
+                a(href='getAccountStatus') getAccountStatus
+
+          .bd-toc-item.active
+            a.bd-toc-link(href="#")
+              | Private API
 
 
       .col-8
@@ -87,6 +101,15 @@ body
           .text-xs.row
             h5.text-light About this site
             p.text-light This site provides You access to the Atheios blockchain via API calls.
+            p.text-light If You want to support this site Your cen pledge any amount to the below addresses:
+            br
+            .text-warning
+              i.fab.fa-btc.mr-1.w-4(aria-hidden="true")
+              | BTC 1JCivbdLbvBAE1JK3K2tCfrVFA5A3WoCbc
+            .text-warning
+              i.fab.fa-ethereum.mr-1.w-4(aria-hidden="true")
+              | ETH 0x6b23806BF3eE2cCc31eCc224221861F03B48D55F
+
       .col-12.col-lg-3.m-5
         .font-semibold.text-sm.mb-3
           .text-xs.row

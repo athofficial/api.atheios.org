@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  h1 getAccountStatus
+  p This call will return recent account data
+  h2 Parameters
+  p Atheios address
+  h2 Returns
+  p json reply
+  h2 Example
+  .alert.alert-info(role="alert")
+    | $ curl "https://api.atheios.org/api/getAccountStatus?0xa166eb16df163f2826de4549d1b05aca74261c01"
+  h2 Link
+  .alert.alert-info(role="alert")
+    a(href='/api/getAccountStatus?addr=0xa166eb16df163f2826de4549d1b05aca74261c01') https://api.atheios.org/api/getAccountStatus?addr=0xa166eb16df163f2826de4549d1b05aca74261c01

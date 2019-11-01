@@ -1,0 +1,78 @@
+extends layout
+
+block content
+  h1 Register
+  p Oh boy, registration. The good news: registration is free, the bad: it is mandatory. As You are having the possibility to earn and spend Atheios, we will allocate You a bloxxchain ATH account with the registration. It is free and without obligations. And You can according to GPDR remove Your account anytime.
+   script#rendered-js.
+      var code;
+      function createCaptcha() {
+          //clear the contents of captcha div first
+          document.getElementById('captcha').innerHTML = "";
+          var charsArray =
+              "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@!#$%^&*";
+          var lengthOtp = 6;
+          var captcha = [];
+          for (var i = 0; i < lengthOtp; i++) {
+              //below code will not allow Repetition of Characters
+              var index = Math.floor(Math.random() * charsArray.length + 1); //get the next character from the array
+              if (captcha.indexOf(charsArray[index]) == -1)
+                  captcha.push(charsArray[index]); else
+                  i--;
+          }
+          var canv = document.createElement("canvas");
+          canv.id = "captcha";
+          canv.width = 100;
+          canv.height = 50;
+          var ctx = canv.getContext("2d");
+          ctx.font = "25px Georgia";
+          ctx.strokeText(captcha.join(""), 0, 30);
+          //storing captcha so that can validate you can save it somewhere else according to your specific requirements
+          code = captcha.join("");
+          document.getElementById("captcha").appendChild(canv); // adds the canvas to the body element
+      }
+      function validateCaptcha() {
+          if (document.getElementById("cpatchaTextBox").value == code) {
+              //alert("Valid Captcha");
+          } else {
+              event.preventDefault();
+              alert("Invalid Captcha. try Again");
+              createCaptcha();
+          }
+      }
+
+  form(method='POST', action='/users/register', onsubmit="validateCaptcha()")
+    #form-group
+      label Name:
+      input.form-control(name='name', type='text')
+    #form-group
+      label Email:
+      input.form-control(name='email', type='text')
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else. You will receive an email to confirm Your address and to finish registration.</small>
+    #form-group
+      label Username:
+      input.form-control(name='username',type='text')
+    #form-group
+      label#indicator1 Password:
+      input.form-control(name='password',type='password', id='pass1' onkeyup='checkPass1(); return false;')
+    #form-group
+      label#indicator2 Confirm:
+      input.form-control(name='password2',type='password', id='pass2', onkeyup='checkPass2(); return false;')
+      label Your ATH mainacount
+      input.form-control(name='depositaddr',type='text')
+      small#depositHelp.form-text.text-muted
+        | Optional: This should be Your main account address, as we will send money to this one if You would decide to withdraw funds from Your bloxxchain ATH address.
+      label New to Atheios?
+      .form-group.form-check
+        input#newuser.form-check-input(name='newuser', type='checkbox')
+        label.form-check-label(for='newuser') New beginner 10 ATH bonus
+      small#newuserHelp.form-text.text-muted
+        | Optional: This is really for new users to the Atheios ecosystem. Applying for the welcome bonus will lock Your withdrawl for a week.
+      br
+      img(src="/client/img/1x1.gif" onload="createCaptcha()")
+      #captcha
+      input#cpatchaTextBox(type='text', placeholder='Captcha')
+      input.btn.btn-primary(type='submit',value='Submit')
+
+
+
+  script(src='/js/passwd.js')

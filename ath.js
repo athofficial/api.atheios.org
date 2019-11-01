@@ -28,10 +28,45 @@ var version = web3.version;
 console.log(" >>> DEBUG version: " + version);
 
 
-exports.athGetBlockNumber = function(cb) {
-    web3.eth.getBlockNumber(function(error, result) {
+
+exports.athSubscribePending = async function(type, hlpfunc,  cb) {
+    await web3.eth.subscribe(type, async function(error, result) {
         if(!error) {
-            console.log(result);
+
+            cb(null, result);
+        } else {
+            console.log("error", error);
+            cb(error, null);
+        }
+    })
+    .on("data", function (transactionHash) {
+        web3.eth.getTransaction(transactionHash)
+            .then(function (transaction) {
+                hlpfunc(transaction);
+            });
+    })
+
+};
+
+exports.athSubscribeNewBlock = async function(type, hlpfunc,  cb) {
+    await web3.eth.subscribe(type, async function(error, result) {
+        if(!error) {
+
+            cb(null, result);
+        } else {
+            console.log("error", error);
+            cb(error, null);
+        }
+    })
+        .on("data", function (blockheader) {
+            hlpfunc(blockheader);
+        });
+};
+
+
+exports.athGetBlockNumber = async function(cb) {
+    await web3.eth.getBlockNumber(async function(error, result) {
+        if(!error) {
             cb(null, result);
         } else {
             console.log("error", error);
@@ -40,13 +75,47 @@ exports.athGetBlockNumber = function(cb) {
     });
 };
 
-exports.athGetHashrate = function(cb) {
-    web3.eth.getBlockNumber(function(error, blockNum) {
+exports.athGetTransact = async function(hash, cb) {
+    await web3.eth.getTransaction(hash, async function(error, trans) {
+        if(!error) {
+            cb(null, trans);
+        } else {
+            console.log("error", error);
+            cb(error, null);
+        }
+    });
+};
+
+exports.athGetBlock = async function(nr, cb) {
+    await web3.eth.getBlock(nr, async function(error, result) {
+        if(!error) {
+            cb(null, result);
+        } else {
+            console.log("error", error);
+            cb(error, null);
+        }
+    });
+};
+
+exports.athGetBalance = async function(addr, cb) {
+    await web3.eth.getBalance(addr, async function (error, result) {
+        if (!error) {
+            cb(null, result);
+        } else {
+            console.log("error", error);
+            cb(error, null);
+        }
+    });
+};
+
+
+exports.athGetHashrate = async function(cb) {
+    await web3.eth.getBlockNumber(async function(error, blockNum) {
         let sampleSize=4;
         if(!error) {
-            web3.eth.getBlock(blockNum, true, function(error, result) {
+            await web3.eth.getBlock(blockNum, true, async function(error, result) {
                 let t1=result.timestamp;
-                web3.eth.getBlock(blockNum-sampleSize, true, function(error, result2) {
+                await web3.eth.getBlock(blockNum-sampleSize, true, async function(error, result2) {
                     let t2=result2.timestamp;
                     let blockTime=(t1-t2)/sampleSize;
                     let difficulty=result.difficulty;
@@ -64,13 +133,13 @@ exports.athGetHashrate = function(cb) {
 
 };
 
-exports.athGetBlockTime = function(cb) {
-    web3.eth.getBlockNumber(function(error, blockNum) {
+exports.athGetBlockTime = async function(cb) {
+    await web3.eth.getBlockNumber(async function(error, blockNum) {
         let sampleSize=4;
         if(!error) {
-            web3.eth.getBlock(blockNum, true, function(error, result) {
+            await web3.eth.getBlock(blockNum, true, async function(error, result) {
                 let t1=result.timestamp;
-                web3.eth.getBlock(blockNum-sampleSize, true, function(error, result2) {
+                await web3.eth.getBlock(blockNum-sampleSize, true, async function(error, result2) {
                     let t2=result2.timestamp;
                     let blockTime=(t1-t2)/sampleSize;
                     cb(null, blockTime);
