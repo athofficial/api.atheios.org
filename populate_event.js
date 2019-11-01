@@ -1,6 +1,9 @@
 // Connect to database
 // Establishing connection to the database
 // Instatiate database
+console.log("Reading config data");
+var config = require("./config")();
+
 var util =require('util');
 const Database=require('./database');
 global.pool=new Database();
