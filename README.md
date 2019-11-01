@@ -13,25 +13,30 @@ git clone https://github.com/athofficial/api.atheios.org
 ```
 Now a directory called api.atheios.org should be available.
 Enter the directory with 
-´´´
+```
 cd api.atheios.org
-´´´
-
+```
 
 Thereafter we load the dependencies:
 ```
 $ npm install
 ```
-This will install all dependencies and might take a while. After that You can start the server. However note that You need also have gath running in the background. Get the latest gath release and make sure it is running in Your home directory. I create for that a directory in the home dir call gath. That one holds the executable and a script. The script is called 'start_gath.sh' and has the following syntax:
+This will install all dependencies and might take a while. 
+
+Next we install gath, the Atheios blockchain executable. Get the latest gath release and place it in Your home directory in a subdirectory called gath. In gath should be the executable and a start script.
+
+The script is called 'start_gath.sh' and has the following syntax:
 ```
 #!/bin/bash
 
-./gath --rpc --rpcaddr 0.0.0.0 --rpcport 8696 --rpccorsdomain "http://localhost" --rpcapi "personal,db,eth,net,web3"
-
+./gath --rpc --rpcaddr 0.0.0.0 --rpcport 8696 --rpccorsdomain "http://localhost" --rpcapi "personal,db,eth,net,web3" --syncmode=full
 ```
 
+You can run gath with the start script in the background, however syncing the complete blockchain might take 24hrs or more.
+I also run gath with supervisor in order to automatically restart it if it should go down.
+
 # Run
-The following command will start the server.
+After the blcockchain is fully synced, the following command will start the server.
 ```
 $ node bin/www
 ```
