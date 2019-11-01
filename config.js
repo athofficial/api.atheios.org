@@ -10,9 +10,12 @@ module.exports = function() {
 //LOAD JSON
     if(process.env.NODE_ENV === undefined || process.env.NODE_ENV == null || process.env.NODE_ENV == 'development') {
         config_data = require('./config/config.development.json')
+        console.log("... development");
     } else {
         if(process.env.NODE_ENV == 'production') {
             config_data = require('./config/config.production.json')
+            console.log("... production");
+
         }}
 //LOAD FROM ENV VARIABLES
     config_data.connection_string = process.env.connection_string
