@@ -1,6 +1,8 @@
 // Establishing connection to the database
 var mysql = require('mysql');
 var util= require('util');
+console.log("Reading config data");
+var config = require("./config")();
 
 
 class Database {
