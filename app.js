@@ -15,6 +15,9 @@ const passport = require('passport');
 global.debugon=true;
 global.version="0.03";
 
+// Instatiate database
+const Database=require('./database');
+global.pool=new Database();
 
 
 let indexRouter = require('./routes/index');
@@ -25,10 +28,12 @@ let api_getMonetaryPolicy = require('./routes/api/getMonetaryPolicy');
 let api_getHashRate = require('./routes/api/getHashRate');
 let api_getGas = require('./routes/api/getGas');
 let api_getAccountStatus = require('./routes/api/getAccountStatus');
+let api_getRichList = require('./routes/api/getRichList');
 let getBlockNumberRouter = require('./routes/getBlockNumber');
 let getEpoch = require('./routes/getEpoch');
 let getHashRate = require('./routes/getHashRate');
 let getAccountStatus = require('./routes/getAccountStatus');
+let getRichList = require('./routes/getRichList');
 let getMonetaryPolicy = require('./routes/getMonetaryPolicy');
 let currentSupply = require('./routes/currentSupply');
 let getGas = require('./routes/getGas');
@@ -104,6 +109,7 @@ app.use('/', getEpoch);
 app.use('/', getHashRate);
 app.use('/', getMonetaryPolicy);
 app.use('/', getAccountStatus);
+app.use('/', getRichList);
 app.use('/', currentSupply);
 app.use('/', getGas);
 app.use('/', whatsnew);
@@ -116,6 +122,7 @@ app.use('/api/getMonetaryPolicy', api_getMonetaryPolicy);
 app.use('/api/getHashRate', api_getHashRate);
 app.use('/api/getGas', api_getGas);
 app.use('/api/getAccountStatus', api_getAccountStatus);
+app.use('/api/getRichList', api_getRichList);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

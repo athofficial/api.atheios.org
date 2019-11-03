@@ -9,7 +9,318 @@ block content
   p json reply
   h2 Example
   .alert.alert-info(role="alert")
-    | $ curl "https://api.atheios.org/api/getAccountStatus?0xa166eb16df163f2826de4549d1b05aca74261c01"
+    | $ curl "https://api.atheios.org/api/getAccountStatus?addr=0xa166eb16df163f2826de4549d1b05aca74261c01"
+  p Returns the following
+  .alert.alert-info(role="alert")
+    | {
+    |   "balance": 9015855.57,
+    |   "in_count": 200892,
+    |   "out_count": 775,
+    |   "incoming": [
+    |     {
+    |       "tx_inhash": "0x67673edc9cdb847448d40c099be5eb70b29094d2946f1fbe27eb374e74c9bd2c",
+    |       "value_in_ATH": "89.1",
+    |       "timestamp": "Sun Nov 03 2019 08:23:06 GMT+0100 (Central European Standard Time)",
+    |       "block": "2120087"
+    |     },
+    |     {
+    |       "tx_inhash": "0xb17de1c27462fc652337fb301c9bffdeca37be495c593f50e17e0485e18fbb2c",
+    |       "value_in_ATH": "244.41",
+    |       "timestamp": "Sun Nov 03 2019 08:23:06 GMT+0100 (Central European Standard Time)",
+    |       "block": "2120087"
+    |     },
+    |     {
+    |       "tx_inhash": "0xa7a93eb03bc4811b999af332b0f05c3028d26861267cc1de8bf93215674f8cf9",
+    |       "value_in_ATH": "121.77",
+    |       "timestamp": "Sun Nov 03 2019 08:23:06 GMT+0100 (Central European Standard Time)",
+    |       "block": "2120087"
+    |     },
+    |     {
+    |       "tx_inhash": "0x3150cc0d419ba58cb42014c745bb88d9194f3fc3379934827a9eb1362ea9fe42",
+    |       "value_in_ATH": "44.55",
+    |       "timestamp": "Sun Nov 03 2019 08:13:34 GMT+0100 (Central European Standard Time)",
+    |       "block": "2120074"
+    |     },
+    |     {
+    |       "tx_inhash": "0xd9816555b913000ed3d2861972676d056727ec54e72eea4dc285e98896a94f4f",
+    |       "value_in_ATH": "100.25",
+    |       "timestamp": "Sun Nov 03 2019 08:13:34 GMT+0100 (Central European Standard Time)",
+    |       "block": "2120074"
+    |     },
+    |     {
+    |       "tx_inhash": "0x3eb9a1bf78d8d1596827d75c374930d53e85704020eaf5d864e6dbc1c151e9d7",
+    |       "value_in_ATH": "184.14",
+    |       "timestamp": "Sun Nov 03 2019 07:55:05 GMT+0100 (Central European Standard Time)",
+    |       "block": "2120025"
+    |     },
+    |     {
+    |       "tx_inhash": "0x3f44d52f6a45b14e13a7db620fd0ba132935dedae980c0d49d8774e83260eb88",
+    |       "value_in_ATH": "41.58",
+    |       "timestamp": "Sun Nov 03 2019 07:35:55 GMT+0100 (Central European Standard Time)",
+    |       "block": "2119967"
+    |     },
+    |     {
+    |       "tx_inhash": "0x5b75971fc047d436132cb8c8aed1d559072f0d666a932c31b4a126627d735af0",
+    |       "value_in_ATH": "259.71",
+    |       "timestamp": "Sun Nov 03 2019 07:35:55 GMT+0100 (Central European Standard Time)",
+    |       "block": "2119967"
+    |     },
+    |     {
+    |       "tx_inhash": "0xeb87f58beb8391fb5142679fcb384f8f8ac70457c0b86bd4a61134c704b6e600",
+    |       "value_in_ATH": "121.77",
+    |       "timestamp": "Sun Nov 03 2019 07:19:40 GMT+0100 (Central European Standard Time)",
+    |       "block": "2119909"
+    |     },
+    |     {
+    |       "tx_inhash": "0xfafbe958ec873b5ed1cb6cbc2ca091f619276e9458ffb6ab643cec1abfd41d58",
+    |       "value_in_ATH": "71.53",
+    |       "timestamp": "Sun Nov 03 2019 07:05:05 GMT+0100 (Central European Standard Time)",
+    |       "block": "2119862"
+    |     },
+    |     {
+    |       "tx_inhash": "0xda23e136d68aba8e156e3d28350c736c713887ee9b4eed925ef4a53645b43d23",
+    |       "value_in_ATH": "44.55",
+    |       "timestamp": "Sun Nov 03 2019 07:01:10 GMT+0100 (Central European Standard Time)",
+    |       "block": "2119850"
+    |     },
+    |     {
+    |       "tx_inhash": "0x64997697f9bfd0d2c71c53075cf319b9e68c8bfee3765d70c2e79e789799ff95",
+    |       "value_in_ATH": "139.59",
+    |       "timestamp": "Sun Nov 03 2019 06:42:26 GMT+0100 (Central European Standard Time)",
+    |       "block": "2119796"
+    |     },
+    |     {
+    |       "tx_inhash": "0x3fd3156ed6a17bd2eacd6c9ac935aeaf2aed9826ce7a3e19dd6b79fa3f61ad5a",
+    |       "value_in_ATH": "597.9",
+    |       "timestamp": "Sun Nov 03 2019 06:31:46 GMT+0100 (Central European Standard Time)",
+    |       "block": "2119771"
+    |     },
+    |     {
+    |       "tx_inhash": "0x582a1cf7b554e3e0a713985a828987bcba69e59e17bb574b5d25d03a4ca2a233",
+    |       "value_in_ATH": "1,017.41",
+    |       "timestamp": "Sun Nov 03 2019 06:31:46 GMT+0100 (Central European Standard Time)",
+    |       "block": "2119771"
+    |     },
+    |     {
+    |       "tx_inhash": "0xc0f1e94c64a2cabe7aa364084ec732b4197c7c58a92095629c4eccc7b2b57609",
+    |       "value_in_ATH": "55.69",
+    |       "timestamp": "Sun Nov 03 2019 06:13:39 GMT+0100 (Central European Standard Time)",
+    |       "block": "2119730"
+    |     },
+    |     {
+    |       "tx_inhash": "0xc075f947d5c8811ac6254f9e59dd9248006b9794c6c4323d3d2860ef1470e265",
+    |       "value_in_ATH": "162.76",
+    |       "timestamp": "Sun Nov 03 2019 06:13:39 GMT+0100 (Central European Standard Time)",
+    |       "block": "2119730"
+    |     },
+    |     {
+    |       "tx_inhash": "0xb1b9caaa7657aa6c102d36763a0b56f2734b76ba4076d668ef0513dd60588f98",
+    |       "value_in_ATH": "8.91",
+    |       "timestamp": "Sun Nov 03 2019 06:13:39 GMT+0100 (Central European Standard Time)",
+    |       "block": "2119730"
+    |     },
+    |     {
+    |       "tx_inhash": "0x36206f63520bf2a37768c9b1b5cb090184b15f5806a9b57083dbefa8b1333ec6",
+    |       "value_in_ATH": "213.84",
+    |       "timestamp": "Sun Nov 03 2019 05:54:16 GMT+0100 (Central European Standard Time)",
+    |       "block": "2119677"
+    |     },
+    |     {
+    |       "tx_inhash": "0x8c8c9f703a160f3fdbe67b404079d302e1ec389664a36d4695c5953eed73c826",
+    |       "value_in_ATH": "35.64",
+    |       "timestamp": "Sun Nov 03 2019 05:35:33 GMT+0100 (Central European Standard Time)",
+    |       "block": "2119619"
+    |     },
+    |     {
+    |       "tx_inhash": "0xe40298c72299ec03f0cfbb7c7e28c965e652965b32f24a1e01e053d24749c5da",
+    |       "value_in_ATH": "106.92",
+    |       "timestamp": "Sun Nov 03 2019 05:31:30 GMT+0100 (Central European Standard Time)",
+    |       "block": "2119603"
+    |     },
+    |     {
+    |       "tx_inhash": "0x5c89149a52fce9e06e6ede415b2d57664c0d6ab939d93cb8ecee99f627b54bd4",
+    |       "value_in_ATH": "106.92",
+    |       "timestamp": "Sun Nov 03 2019 05:16:54 GMT+0100 (Central European Standard Time)",
+    |       "block": "2119562"
+    |     },
+    |     {
+    |       "tx_inhash": "0xc7c2dc57c852fc45208dd7c44693bbb16fe242a86498eceb402bcc6418ecd46a",
+    |       "value_in_ATH": "207.11",
+    |       "timestamp": "Sun Nov 03 2019 05:16:54 GMT+0100 (Central European Standard Time)",
+    |       "block": "2119562"
+    |     },
+    |     {
+    |       "tx_inhash": "0x1c099e9b2b37d190566e5e8383cf0dd3ad6a81938a93c2f4b2e981e33c2a7fc0",
+    |       "value_in_ATH": "90.8",
+    |       "timestamp": "Sun Nov 03 2019 05:11:54 GMT+0100 (Central European Standard Time)",
+    |       "block": "2119549"
+    |     },
+    |     {
+    |       "tx_inhash": "0x40fc7717897507f633f76eecd92f7057a806873f5cf88351df6600bbd6629c4c",
+    |       "value_in_ATH": "54.45",
+    |       "timestamp": "Sun Nov 03 2019 05:02:19 GMT+0100 (Central European Standard Time)",
+    |       "block": "2119523"
+    |     },
+    |     {
+    |       "tx_inhash": "0xd34f22ac8e61968d347a9cdc78c753b3c43a5284e8e7b9626bc1529acd953463",
+    |       "value_in_ATH": "26.73",
+    |       "timestamp": "Sun Nov 03 2019 04:52:51 GMT+0100 (Central European Standard Time)",
+    |       "block": "2119501"
+    |     }
+    |   ],
+    |   "outgoing": [
+    |     {
+    |       "tx_outhash": "0xc19b39ed2e8fe1e2bc375834a20b4d95408db28f4e828fa51222cd3dd9cbf98f",
+    |       "value_in_ATH": "551",
+    |       "timestamp": "Fri Nov 01 2019 23:10:55 GMT+0100 (Central European Standard Time)",
+    |       "block": "2114590"
+    |     },
+    |     {
+    |       "tx_outhash": "0x2fc50ef8f2211bc97eb6700b645131f27110a04e11cffb6673a2e30bc7f505a3",
+    |       "value_in_ATH": "23,375.54",
+    |       "timestamp": "Mon Oct 28 2019 00:47:20 GMT+0100 (Central European Standard Time)",
+    |       "block": "2095430"
+    |     },
+    |     {
+    |       "tx_outhash": "0x69176ecfeabce6b4b87e03ad1cb09946b8bff591f64c3d939a0dca22d492dc30",
+    |       "value_in_ATH": "58.22",
+    |       "timestamp": "Thu Oct 10 2019 13:50:48 GMT+0200 (Central European Summer Time)",
+    |       "block": "2026848"
+    |     },
+    |     {
+    |       "tx_outhash": "0x2782798f431056ba19677ac787526be6d63a000e6cf3269e1e03d7e5a8f3b5e3",
+    |       "value_in_ATH": "40",
+    |       "timestamp": "Sun Oct 06 2019 18:45:57 GMT+0200 (Central European Summer Time)",
+    |       "block": "2011794"
+    |     },
+    |     {
+    |       "tx_outhash": "0xde8e5000f5a4dd58941f92fc062858b787a90ad62a3bb6b0fb04264052cfb01e",
+    |       "value_in_ATH": "307,365.85",
+    |       "timestamp": "Sat Sep 28 2019 15:14:55 GMT+0200 (Central European Summer Time)",
+    |       "block": "1979921"
+    |     },
+    |     {
+    |       "tx_outhash": "0xd34b22ac0ab053fe9d79d037e0904d7530d6790a8d936c7f61d3189e11663214",
+    |       "value_in_ATH": "640,673.1",
+    |       "timestamp": "Wed Sep 18 2019 05:06:33 GMT+0200 (Central European Summer Time)",
+    |       "block": "1939226"
+    |     },
+    |     {
+    |       "tx_outhash": "0x3d463208c778c5e38120d12839258f6c57faa318b501cd3bc47bfe619ac7d99c",
+    |       "value_in_ATH": "11,415.37",
+    |       "timestamp": "Fri Sep 13 2019 15:01:01 GMT+0200 (Central European Summer Time)",
+    |       "block": "1921240"
+    |     },
+    |     {
+    |       "tx_outhash": "0x3d78ffcc39f8680a1f8ef255f442b1e689017025751eda3c3d6abb2d1e5b876e",
+    |       "value_in_ATH": "14,469.52",
+    |       "timestamp": "Tue Sep 10 2019 13:09:51 GMT+0200 (Central European Summer Time)",
+    |       "block": "1909112"
+    |     },
+    |     {
+    |       "tx_outhash": "0x5e80383b9f1d03fadcf29f1a9a5283deea5a8b6d1a09d77a69f6873903ebc9f9",
+    |       "value_in_ATH": "17,403.07",
+    |       "timestamp": "Tue Sep 03 2019 16:37:29 GMT+0200 (Central European Summer Time)",
+    |       "block": "1882111"
+    |     },
+    |     {
+    |       "tx_outhash": "0xb40a31369fadc4e0aeca7f51176736fbe86a118cef328a4c58c57b9890d3dd24",
+    |       "value_in_ATH": "6,708.72",
+    |       "timestamp": "Fri Aug 30 2019 15:42:20 GMT+0200 (Central European Summer Time)",
+    |       "block": "1866278"
+    |     },
+    |     {
+    |       "tx_outhash": "0xc761ccec20bc48847f6bfd0090fa64da9e9d080cfb4acd5ccc4ab9e003c08ef4",
+    |       "value_in_ATH": "23,134.89",
+    |       "timestamp": "Tue Aug 27 2019 13:01:36 GMT+0200 (Central European Summer Time)",
+    |       "block": "1854410"
+    |     },
+    |     {
+    |       "tx_outhash": "0x403bab0b0319774e18cb3e0215e8fc4d61075817675a4a75f31bb8d794b58da2",
+    |       "value_in_ATH": "19,857.49",
+    |       "timestamp": "Wed Aug 21 2019 15:42:26 GMT+0200 (Central European Summer Time)",
+    |       "block": "1831272"
+    |     },
+    |     {
+    |       "tx_outhash": "0x3bf02d982b18fde743dc07a9462ff73fa1d761763cb135f75abd102cb6397cde",
+    |       "value_in_ATH": "249,487.31",
+    |       "timestamp": "Mon Aug 19 2019 05:00:27 GMT+0200 (Central European Summer Time)",
+    |       "block": "1821672"
+    |     },
+    |     {
+    |       "tx_outhash": "0x7d98eb42d716d66bf5309bf0f06c33ab60e2c7a3865848ea66cb811a1731dfbc",
+    |       "value_in_ATH": "490",
+    |       "timestamp": "Mon Aug 19 2019 03:45:14 GMT+0200 (Central European Summer Time)",
+    |       "block": "1821476"
+    |     },
+    |     {
+    |       "tx_outhash": "0x905ee3917e35eeae2c4299b993fc7df878f1134e3bb7a38010647e955584011b",
+    |       "value_in_ATH": "5,082.22",
+    |       "timestamp": "Thu Aug 15 2019 18:11:14 GMT+0200 (Central European Summer Time)",
+    |       "block": "1808093"
+    |     },
+    |     {
+    |       "tx_outhash": "0xd2de96133c440c873b1ada1c588e266f988e0210eef57377be42692a95b61d92",
+    |       "value_in_ATH": "195",
+    |       "timestamp": "Thu Aug 15 2019 02:14:53 GMT+0200 (Central European Summer Time)",
+    |       "block": "1805465"
+    |     },
+    |     {
+    |       "tx_outhash": "0x1f1f65bc4739988c95fc69894992cfce28cef45cbb5293c993130586fb6efdb9",
+    |       "value_in_ATH": "34,120.32",
+    |       "timestamp": "Fri Aug 09 2019 20:16:01 GMT+0200 (Central European Summer Time)",
+    |       "block": "1784663"
+    |     },
+    |     {
+    |       "tx_outhash": "0x0bf4220d25fc1a70f57eb1dd0fd5101272a5bf4bcc6e51a62c7c6b55f5b654f7",
+    |       "value_in_ATH": "193.29",
+    |       "timestamp": "Fri Aug 09 2019 16:38:13 GMT+0200 (Central European Summer Time)",
+    |       "block": "1784061"
+    |     },
+    |     {
+    |       "tx_outhash": "0xd32409bc666d5c3a73e822cfdd1250265b53525f4d49a5b232e8d76723de5618",
+    |       "value_in_ATH": "1,956.25",
+    |       "timestamp": "Thu Aug 08 2019 15:52:13 GMT+0200 (Central European Summer Time)",
+    |       "block": "1780026"
+    |     },
+    |     {
+    |       "tx_outhash": "0x7b7194e016730f6939880bc89386a9fe8005052e0a185447cc7e748e16bbf2e4",
+    |       "value_in_ATH": "7,442.21",
+    |       "timestamp": "Thu Aug 08 2019 03:21:38 GMT+0200 (Central European Summer Time)",
+    |       "block": "1777860"
+    |     },
+    |     {
+    |       "tx_outhash": "0x5f85afda0d7ac7a88b0c003789a96f3f95dbed8b12232dff6ee8302690b51d24",
+    |       "value_in_ATH": "3,032",
+    |       "timestamp": "Wed Aug 07 2019 11:08:00 GMT+0200 (Central European Summer Time)",
+    |       "block": "1775430"
+    |     },
+    |     {
+    |       "tx_outhash": "0x3db1b8d54eb562b3e0bfad7869d9d0f4b2d1221b9341155f70a8f91f983be04f",
+    |       "value_in_ATH": "2,933.39",
+    |       "timestamp": "Tue Aug 06 2019 04:39:02 GMT+0200 (Central European Summer Time)",
+    |       "block": "1770458"
+    |     },
+    |     {
+    |       "tx_outhash": "0x5a5067a63b5cfb875149ac57a7eefddf7c368d30f663e503ad3c1c5a4f30c7cd",
+    |       "value_in_ATH": "50",
+    |       "timestamp": "Wed Jul 31 2019 18:53:46 GMT+0200 (Central European Summer Time)",
+    |       "block": "1749454"
+    |     },
+    |     {
+    |       "tx_outhash": "0xb079854dd9383d2735cb47894e5f0fc75423572f1891e4ec8a5d664fdb0b72f5",
+    |       "value_in_ATH": "2,271.02",
+    |       "timestamp": "Wed Jul 31 2019 14:56:14 GMT+0200 (Central European Summer Time)",
+    |       "block": "1748810"
+    |     },
+    |     {
+    |       "tx_outhash": "0xbdd4968b9892a84803eafc4539d51ffb54a433ac84c0c1cc0d0c07f0473e7f12",
+    |       "value_in_ATH": "81,014.1",
+    |       "timestamp": "Mon Jul 29 2019 15:50:03 GMT+0200 (Central European Summer Time)",
+    |       "block": "1741137"
+    |     }
+    |   ]
+    | }
   h2 Link
   .alert.alert-info(role="alert")
     a(href='/api/getAccountStatus?addr=0xa166eb16df163f2826de4549d1b05aca74261c01') https://api.atheios.org/api/getAccountStatus?addr=0xa166eb16df163f2826de4549d1b05aca74261c01

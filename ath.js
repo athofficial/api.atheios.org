@@ -29,6 +29,11 @@ console.log(" >>> DEBUG version: " + version);
 
 
 
+
+exports.athIsAddress = function(address) {
+    return(web3.utils.isAddress(address));
+};
+
 exports.athSubscribePending = async function(type, hlpfunc,  cb) {
     await web3.eth.subscribe(type, async function(error, result) {
         if(!error) {
@@ -39,12 +44,12 @@ exports.athSubscribePending = async function(type, hlpfunc,  cb) {
             cb(error, null);
         }
     })
-    .on("data", function (transactionHash) {
-        web3.eth.getTransaction(transactionHash)
-            .then(function (transaction) {
-                hlpfunc(transaction);
-            });
-    })
+        .on("data", function (transactionHash) {
+            web3.eth.getTransaction(transactionHash)
+                .then(function (transaction) {
+                    hlpfunc(transaction);
+                });
+        })
 
 };
 

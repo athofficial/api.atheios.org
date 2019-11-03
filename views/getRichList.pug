@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  h1 getRichList
+  p This call will return the top 100 rich list
+  h2 Parameters
+  p None
+  h2 Returns
+  p json reply with the top 100 tuples address/balance
+  h2 Example
+  .alert.alert-info(role="alert")
+    | $ curl "https://api.atheios.org/api/getRichList"
+  h2 Link
+  .alert.alert-info(role="alert")
+    a(href='/api/getRichList') https://api.atheios.org/api/getRichList

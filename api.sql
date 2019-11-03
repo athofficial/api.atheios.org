@@ -24,9 +24,9 @@ DROP TABLE IF EXISTS `address`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `address` (
   `address` varchar(45) UNIQUE NOT NULL,
-  `balance` varchar(255) DEFAULT NULL,
-  `inputcount` int(11) DEFAULT NULL,
-  `outputcount` int(11) DEFAULT NULL,
+  `balance` DECIMAL(65,0) DEFAULT NULL,
+  `inputcount` int(11) DEFAULT 0,
+  `outputcount` int(11) DEFAULT 0,
   PRIMARY KEY (`address`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -51,14 +51,14 @@ CREATE TABLE `block` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `blockhash` varchar(66) NOT NULL,
   `miner` varchar(45) NOT NULL,
-  `timestamp` int(11) NOT NULL,
-  `size` int(11) DEFAULT NULL,
+  `timestamp` int(11) DEFAULT 0,
+  `size` int(11) DEFAULT 0,
   `transactions` varchar(32765) DEFAULT NULL,
-  `number` int(11) DEFAULT NULL,
+  `number` int(11) DEFAULT 0,
   `uncle_hash` varchar(66) DEFAULT NULL,
   `data` varchar(255) DEFAULT NULL,
-  `gasused` int(11) DEFAULT NULL,
-  `blockchain_id` int(11) DEFAULT NULL,
+  `gasused` int(11) DEFAULT 0,
+  `blockchain_id` int(11) DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -113,7 +113,7 @@ CREATE TABLE `transaction` (
   `gasprice` varchar(255) DEFAULT NULL,
   `nonce` varchar(255) DEFAULT NULL,
   `txdata` varchar(32765) DEFAULT NULL,
-  `block_id` varchar(255) DEFAULT NULL,
+  `block_id` int(11) DEFAULT NULL,
   `receiver` varchar(45) DEFAULT NULL,
   `sender` varchar(45) DEFAULT NULL,
   `timestamp` int(11) DEFAULT NULL,

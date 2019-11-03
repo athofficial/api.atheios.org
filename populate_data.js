@@ -11,13 +11,6 @@ global.pool=new Database();
 global.debugon=true;
 global.version="0.04";
 
-if (process.env.production) {
-    console.log('This is a development env...');
-}
-else {
-    console.log('This is a production env...')
-}
-
 var {athGetBlockNumber, athGetBlock, athGetTransact, athGetBalance} = require('./ath');
 
 
@@ -73,6 +66,8 @@ async function syncBlockChain() {
     }
     console.log("Latest block in DB:", latestSyncedBlock);
     console.log("Latest block in Blockchain:", latestBlock);
+    console.log("Stage 1: Register now blocks and related transactions");
+
     var start=new Date();
     var end;
     while (blockcount < latestBlock) {
@@ -81,9 +76,9 @@ async function syncBlockChain() {
         } catch (e) {
             throw e;
         }
-        if (block.number % 100 == 0){
-            end= new Date - start;
-            console.log("Current block: %d, execution time: %dms, Total time: %d min", block.number, end, ((latestBlock-blockcount)*end/6000000));
+        if (block.number % 1000 == 0) {
+            end = new Date - start;
+            console.log("Current block: %d, execution time: %dms, Total time: %d min", block.number, end, ((latestBlock - blockcount) * end / 60000000));
             start = new Date;
         }
 
@@ -105,6 +100,9 @@ async function syncBlockChain() {
                 } catch (e) {
                     console.log(e);
                 }
+                if (tx == undefined) {
+                    throw ("TX is undefined");
+                }
                 var txsql = "INSERT INTO transaction (txid, value, gas, gasprice, nonce, txdata, block_id,sender,receiver,timestamp) VALUES ('" + tx.hash + "', '" + tx.value + "', '" + tx.gas + "', '" +
                     tx.gasPrice + "', '" + tx.nonce + "', '" + tx['input'] + "', '" + tx.blockNumber + "','" + tx.from + "','" + tx.to + "','" + timestamp + "')";
                 try {
@@ -113,33 +111,6 @@ async function syncBlockChain() {
                     console.log(e);
                 }
 
-                var tosql = "INSERT INTO address (address,inputcount,outputcount) VALUES ('" + tx["to"] + "','0','0') ON DUPLICATE KEY UPDATE address=address";
-                try {
-                    result = await pool.query(tosql);
-                } catch (e) {
-                    console.log(e);
-                }
-
-                var fromsql = "INSERT INTO address (address,outputcount,inputcount) VALUES ('" + tx["from"] + "','0','0') ON DUPLICATE KEY UPDATE address=address";
-                try {
-                    result = await pool.query(fromsql);
-                } catch (e) {
-                    console.log(e);
-                }
-
-                sql = "UPDATE address SET inputcount = inputcount + 1 WHERE address = '" + tx["to"] + "'";
-                try {
-                    result = await pool.query(sql);
-                } catch (e) {
-                    console.log(e);
-                }
-
-                sql = "UPDATE address SET outputcount = outputcount + 1 WHERE address = '" + tx["from"] + "'";
-                try {
-                    result = await pool.query(sql);
-                } catch (e) {
-                    console.log(e);
-                }
             }
 
 
@@ -151,8 +122,40 @@ async function syncBlockChain() {
         segment++;
     }
 
-    console.log("DB in sync");
+    console.log("Stage 2: Update address DB");
+//    var sql = "SELECT sender, receiver FROM transaction";
+    var sql = "SELECT sender, receiver FROM transaction WHERE block_id>"+latestSyncedBlock;
+
+    try {
+        tx = await pool.query(sql);
+    } catch (e) {
+        throw e;
+    }
+    console.log("Nr of transactions realised:",tx.length);
+
+    for (i=0;i<tx.length;i++) {
+        if (i % 1000 == 0) {
+            end = new Date - start;
+            console.log("Current tx: %d, execution time: %dms, Total time: %d min", i, end, ((tx.length - i) * end / 60000000));
+            start = new Date;
+        }
+        if (tx[i].sender==null || tx[i].receiver==null) {
+            console.log(tx);
+            throw("Errorc");
+        } else {
+            sql = "INSERT INTO address (address) VALUES ('" + tx[i].receiver + "') ON DUPLICATE KEY UPDATE address=address; INSERT INTO address (address) VALUES ('" + tx[i].sender + "') ON DUPLICATE KEY UPDATE address=address;";
+            sql += "UPDATE address SET inputcount = inputcount + 1 WHERE address = '" + tx[i].receiver + "';UPDATE address SET outputcount = outputcount + 1 WHERE address = '" + tx[i].sender + "';";
+
+            try {
+                result = await pool.query(sql);
+            } catch (e) {
+                console.log(e);
+            }
+        }
+    }
+
     console.log("Update all address balances");
+    console.log("Stage 3: Update address DB");
     // Check if the blockchain is in sync with DB
     var sql = "SELECT * FROM address";
     try {
@@ -160,17 +163,14 @@ async function syncBlockChain() {
     } catch (e) {
         throw e;
     }
-    console.log(result.length);
 
     var balance;
-    for (i=0;i<result.length;i++) {
-        console.log(i);
+    for (i=0;i<result.length-1;i++) {
         try {
             balance = await athGetBalance(result[i].address);
         } catch (e) {
             throw e;
         }
-        console.log("Balance %s, %d",result[i].address, balance);
         sql = "UPDATE address SET balance = "+ balance +" WHERE address = '" + result[i].address + "'";
         try {
             await pool.query(sql);
@@ -178,5 +178,6 @@ async function syncBlockChain() {
             console.log(e);
         }
     }
-
+    console.log("Finished");
+    process.exit();
 }
