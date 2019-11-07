@@ -2,7 +2,7 @@ extends layout
 
 block content
   h1 getAccountStatus
-  p This call will return recent account data
+  p This call will return recent account data and each 25 tx hashes for incoming statements and outgoing statements
   h2 Parameters
   p Atheios address
   h2 Returns
@@ -323,4 +323,4 @@ block content
     | }
   h2 Link
   .alert.alert-info(role="alert")
-    a(href='/api/getAccountStatus?addr=0xa166eb16df163f2826de4549d1b05aca74261c01') https://api.atheios.org/api/getAccountStatus?addr=0xa166eb16df163f2826de4549d1b05aca74261c01
+    a(href='/api/getAccountStatus?addr=0xa166eb16df163f2826de4549d1b05aca74261c01') api/getAccountStatus?addr=0xa166eb16df163f2826de4549d1b05aca74261c01

@@ -14,47 +14,54 @@ router.get('/', function(req, res, next) {
 
     // Check richlist from the API database
     if (athIsAddress(req.query.addr)) {
-        var sql = "SELECT * FROM address where address='" + req.query.addr + "'";
-        pool.query(sql, function (err, result) {
-            if (err)
-                throw(err);
-            var json='{ "balance" : '+ Math.round(result[0].balance/10e15)/100+",";
-            json+='"in_count":'+ result[0].inputcount+",";
-            json+='"out_count":'+ result[0].outputcount+",";
-            json+='"incoming": [';
-            var sql = "SELECT * FROM transaction where receiver='" + req.query.addr + "' ORDER by id DESC LIMIT 25";
-            pool.query(sql, function (err, tx) {
+        athGetBlockNumber(function (err, latestblock) {
+            var sql = "SELECT * FROM address where address='" + req.query.addr + "'";
+            pool.query(sql, function (err, result) {
                 if (err)
                     throw(err);
-                for (i=0;i<tx.length;i++) {
-                    json+='{ "tx_inhash": "'+tx[i].txid +'",' +
-                        ' "value_in_ATH" : "' + numberWithCommas(Math.round(tx[i].value/10E15)/100) + '",' +
-                        ' "timestamp" : "'+ toDateTime(tx[i].timestamp) + '",' +
-                        ' "block" : "'+ tx[i].block_id+'" },';
-                }
-                json=json.slice(0, -1);
-
-                json+='],';
-                json+='"outgoing": [';
-
-                var sql = "SELECT * FROM transaction where sender='" + req.query.addr + "' ORDER by id DESC LIMIT 25";
+                var json='{ "balance" : '+ Math.round(result[0].balance/10e15)/100+",";
+                json+='"in_count":'+ result[0].inputcount+",";
+                json+='"out_count":'+ result[0].outputcount+",";
+                json+='"incoming": [';
+                var sql = "SELECT * FROM transaction where receiver='" + req.query.addr + "' ORDER by id DESC LIMIT 25";
                 pool.query(sql, function (err, tx) {
                     if (err)
                         throw(err);
-                    for (i = 0; i < tx.length; i++) {
-                        json += '{ "tx_outhash": "' + tx[i].txid + '",' +
-                            ' "value_in_ATH" : "' + numberWithCommas(Math.round(tx[i].value/10E15)/100) + '",' +
-                            ' "timestamp" : "' + toDateTime(tx[i].timestamp) + '",' +
-                            ' "block" : "' + tx[i].block_id + '" },';
+                    for (i=0;i<tx.length;i++) {
+                        json+='{ "tx_inhash": "'+tx[i].txid +'",' +
+                            ' "value_in_gwei" : "' + numberWithCommas(Math.round(tx[i].value/1E9)) + '",' +
+                            ' "txid" : "' + tx[i].id + '",' +
+                            ' "timestamp" : "'+ toDateTime(tx[i].timestamp) + '",' +
+                            ' "confirmations" : "'+ (latestblock-tx[i].block_id) + '",' +
+                            ' "block" : "'+ tx[i].block_id+'" },';
                     }
-                    json = json.slice(0, -1);
+                    json=json.slice(0, -1);
 
-                    json += ']';
+                    json+='],';
+                    json+='"outgoing": [';
 
-                    json += '}';
-                    console.log(json);
-                    res.json(JSON.parse(json));
+                    var sql = "SELECT * FROM transaction where sender='" + req.query.addr + "' ORDER by id DESC LIMIT 25";
+                    pool.query(sql, function (err, tx) {
+                        if (err)
+                            throw(err);
+                        for (i = 0; i < tx.length; i++) {
+                            json += '{ "tx_outhash": "' + tx[i].txid + '",' +
+                                ' "value_in_gwei" : "' + numberWithCommas(Math.round(tx[i].value/1E9)) + '",' +
+                                ' "timestamp" : "' + toDateTime(tx[i].timestamp) + '",' +
+                                ' "txid" : "' + tx[i].id + '",' +
+                                ' "confirmations" : "'+ (latestblock-tx[i].block_id) + '",' +
+                                ' "block" : "' + tx[i].block_id + '" },';
+                        }
+                        json = json.slice(0, -1);
+
+                        json += ']';
+
+                        json += '}';
+                        console.log(json);
+                        res.json(JSON.parse(json));
+                    });
                 });
+
             });
 
         });
