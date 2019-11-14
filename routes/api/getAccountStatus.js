@@ -52,8 +52,9 @@ router.get('/', function(req, res, next) {
                                 ' "confirmations" : "'+ (latestblock-tx[i].block_id) + '",' +
                                 ' "block" : "' + tx[i].block_id + '" },';
                         }
-                        json = json.slice(0, -1);
-
+                        if (tx.length!=0) {
+                            json = json.slice(0, -1);
+                        }
                         json += ']';
 
                         json += '}';
